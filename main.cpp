@@ -28,7 +28,7 @@ int main() {
         while (!file.eof())
         {
             file >> str;
-            std::cout << " " << str ;
+            std::cout << str << " ";
         }
     }
     file.close();
