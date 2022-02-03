@@ -9,7 +9,7 @@
 
 int main() {
 
-    static char  buff[1024][1024];
+    std::string str;
 
     std::ifstream file;
     std::string path;
@@ -27,11 +27,9 @@ int main() {
         int i = 0;
         while (!file.eof())
         {
-            file.getline(buff[i],sizeof(buff));
-            std::cout << buff[i] << std::endl;
-            ++i;
+            file >> str;
+            std::cout << " " << str ;
         }
     }
     file.close();
-
 }
