@@ -7,14 +7,16 @@
 #include <fstream>
 #include <string>
 
-int main() {
+const int length = 100;
+char buffer[length];
 
-    std::string str;
+int main() {
 
     std::ifstream file;
     std::string path;
     std::cout << "Enter the path to the file: " << std::endl;
     std::cin >> path;
+
     file.open(path);
     if(!file.is_open())
     {
@@ -24,11 +26,13 @@ int main() {
     {
         std::cout << "File is open: " << std::endl;
 
-        int i = 0;
-        while (!file.eof())
+        file.read(buffer, length);
+
+        while (file.gcount() > 0)
         {
-            file >> str;
-            std::cout << str << " ";
+            std::cout << buffer ;
+            memset(buffer, 0, sizeof(buffer) / sizeof(buffer[0]));
+            file.read(buffer, file.gcount());
         }
     }
     file.close();
