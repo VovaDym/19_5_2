@@ -7,32 +7,26 @@
 #include <fstream>
 #include <string>
 
-const int length = 100;
-char buffer[length];
-
 int main() {
-
+    char buffer[16];
     std::ifstream file;
     std::string path;
     std::cout << "Enter the path to the file: " << std::endl;
     std::cin >> path;
 
     file.open(path);
-    if(!file.is_open())
+    if (!file.is_open())
     {
         std::cout << "Error!";
     }
     else
     {
-        std::cout << "File is open: " << std::endl;
-
-        file.read(buffer, length);
-
-        while (file.gcount() > 0)
+        while (!file.eof())
         {
-            std::cout << buffer ;
             memset(buffer, 0, sizeof(buffer) / sizeof(buffer[0]));
-            file.read(buffer, file.gcount());
+            file.read(buffer, sizeof(buffer) - 1);
+            std::cout << buffer ;
+            buffer[file.gcount()] = 0;
         }
     }
     file.close();
